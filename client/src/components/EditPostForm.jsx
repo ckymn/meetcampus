@@ -30,6 +30,7 @@ const EditPostForm = ({ history, post, closeEditMode }) => {
   const dispatch = useDispatch();
 
   const [file, setFile] = useState(post?.image);
+
   const { register, handleSubmit, control, errors, reset } = useForm({
     resolver: yupResolver(postSchema),
   });

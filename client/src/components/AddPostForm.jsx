@@ -48,15 +48,15 @@ const AddPostForm = ({ open, handleClose }) => {
     resolver: yupResolver(postSchema),
   });
 
-  const onSubmit = (data) => {
-    dispatch(createPost({ ...data, image: file }));
-    clearForm();
-  };
-
-  const clearForm = () => {
+ const clearForm = () => {
     reset();
     setFile(null);
     handleClose();
+  };
+
+  const onSubmit = (data) => {
+    dispatch(createPost({ ...data, image: file }));
+    clearForm();
   };
 
   const classes = useStyles();

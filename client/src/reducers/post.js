@@ -2,7 +2,7 @@ import * as types from "../actions/types";
 
 const initialState = {
   posts: [],
-  currentPost: null,
+  currentPost: null, // ne ise yariyor ogren
 };
 //posts 
 const postReducer = (state = initialState, action) => {

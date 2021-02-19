@@ -32,17 +32,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 // history , location , match/id : bunlar porps ile geliyor
 const PostDetails = ({ history, location, match }) => {
   const { id } = match.params;
-  const dispatch = useDispatch();
 
-  //useSelector : redux store'daki state degerlerini cek.
+  //get one post object
   const currentPost = useSelector((state) => state.post.currentPost);
-  
   const [editMode, setEditMode] = useState(false);
 
+  const dispatch = useDispatch();
   //bu islem sadece sectigimiz bir degsiken degisince calisir
   useEffect(() => {
     dispatch(fetchSinglePost(id));
@@ -51,6 +49,7 @@ const PostDetails = ({ history, location, match }) => {
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
   };
+
 // burda actionCreato fonksiyonunu firlaticaz
   const removePost = () => {
     dispatch(deletePost(currentPost._id));
