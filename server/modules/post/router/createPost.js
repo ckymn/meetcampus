@@ -5,7 +5,6 @@ const model = require("../model");
 const route = async (req, res) => {
   // create post
   const newPost = new model(req.body);
-
   try {
    await newPost.save();
    res.status(201).json(newPost);//hemen ekrana basiyor

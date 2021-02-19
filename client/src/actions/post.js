@@ -59,4 +59,4 @@ export const deletePost = (id) => async (dispatch) => {
   }
 };
 
-// dispatch : bir middleware fonksiyonu donderiyor api degerlerini fonksiyon degilde obje olarak almamizi sagliyorbundleRenderer.renderToStream
+// dispatch : bir middleware fonksiyonu donderiyor api degerlerini fonksiyon degilde obje olarak almamizi sagliyor

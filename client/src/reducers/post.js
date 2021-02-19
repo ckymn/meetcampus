@@ -4,7 +4,7 @@ const initialState = {
   posts: [],
   currentPost: null,
 };
-
+//posts
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.FETCH_POSTS:

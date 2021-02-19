@@ -1,12 +1,14 @@
 import axios from "axios";
 const apiEndpoint = "http://localhost:3003/posts/";
 
-export const fetchPosts = async () => await axios.get(apiEndpoint);
+export const fetchPosts = async () => 
+  await axios.get(apiEndpoint);
 
 export const fetchSinglePost = async (id) =>
   await axios.get(`${apiEndpoint}${id}`);
 
-export const createPost = async (post) => await axios.post(apiEndpoint, post);
+export const createPost = async (post) => 
+  await axios.post(apiEndpoint, post);
 
 export const updatePost = async (id, updatedPost) =>
   await axios.patch(`${apiEndpoint}${id}`, updatedPost);
