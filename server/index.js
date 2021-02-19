@@ -18,9 +18,11 @@ mongoose
 
 //body-parse
 // app.use(express.json());
-app.use(cors());
-app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.json({limit: '50mb', extedned: true}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+
+// good http req
+app.use(cors());
 
 //routers
 app.use(router);
