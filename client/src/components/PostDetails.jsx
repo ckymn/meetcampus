@@ -39,7 +39,7 @@ const PostDetails = ({ history, location, match }) => {
   const dispatch = useDispatch();
 
   //useSelector : redux store'daki state degerlerini cek.
-  const currentPost = useSelector((state) => state.posts.currentPost);
+  const currentPost = useSelector((state) => state.post.currentPost);
   
   const [editMode, setEditMode] = useState(false);
 

@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
 
 const PostsList = () => {
   // get post mongodb
-  const posts = useSelector((state) => state.posts.posts);
-  
+  const posts = useSelector((state) => state.post.posts);
+
   // useState : for use state
   const [layout, setLayout] = useState("gridThree");
 

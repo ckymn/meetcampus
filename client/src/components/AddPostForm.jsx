@@ -13,12 +13,13 @@ import {
   Input,
   MenuItem,
   Dialog,
-  DialogActions,
+  DialogActions, 
   DialogContent,
   DialogContentText,
   DialogTitle,
 } from "@material-ui/core";
 
+//style
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
@@ -28,8 +29,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const tags = ["fun", "programming", "health", "science"];
+const tags = ["C","C++","C#","Java","Pyhton","JavaScript","GO","Dart","Android","Flutter","PhP", "ASP.Net",""];
 
+//validate
 const postSchema = yup.object().shape({
   title: yup.string().required(),
   subtitle: yup.string().required(),

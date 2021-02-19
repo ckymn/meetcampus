@@ -4,7 +4,7 @@ const initialState = {
   posts: [],
   currentPost: null,
 };
-//posts
+//posts 
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.FETCH_POSTS:
@@ -48,3 +48,6 @@ const postReducer = (state = initialState, action) => {
 };
 
 export default postReducer;
+
+// reducer'lar ilgili action'i icerip icermedigine bakiyor.
+// ve action'a gore state degeri belirlemek (return state )

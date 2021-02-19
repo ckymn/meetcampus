@@ -52,7 +52,9 @@ const Post = ({ _id, title, subtitle, content, tag, image, createdAt }) => {
       />
       <div className={classes.overlay}>
         <Typography variant="h6">Civan</Typography>
-        <Typography variant="body2">{convertRelativeTime(createdAt)}</Typography>
+        <Typography variant="body2">
+          {convertRelativeTime(createdAt)}
+        </Typography>
       </div>
       <CardContent>
         <Typography variant="h6" component="p" gutterBottom>
@@ -61,7 +63,9 @@ const Post = ({ _id, title, subtitle, content, tag, image, createdAt }) => {
         <Typography variant="overline" component="p" gutterBottom>
           {subtitle}
         </Typography>{" "}
-        <Typography variant="body2" component="p">{content?.substring(0, 250) + "..."}</Typography>
+        <Typography variant="body2" component="p">
+          {content?.substring(0, 250) + "..."}
+        </Typography>
         <Chip label={`# ${tag}`} variant="outlined" className={classes.chip} />
       </CardContent>
       <CardActions>
