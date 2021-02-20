@@ -1,6 +1,9 @@
 const model = require("../model");
 
-// joi
+//-joi validation
+const scheme = global.joi.object({
+  _id:joi.objectId().required(),
+}).options({ stripUnknown: true })
 
 const route = async (req, res) => {
   const { id: _id } = req.params;
@@ -14,4 +17,4 @@ const route = async (req, res) => {
   }
 };
 
-module.exports = { route };
+module.exports = { scheme ,route };

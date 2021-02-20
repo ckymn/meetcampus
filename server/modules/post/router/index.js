@@ -1,5 +1,5 @@
 module.exports = {
-  fetchpost: require("./post"),
+  fetchpost: require("./fetchPost"),
   createPost: require("./createPost"),
   getSinglePost: require("./getSinglePost"),
   deletePost: require("./deletePost")
