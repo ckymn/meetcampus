@@ -17,7 +17,6 @@ mongoose
   .catch((err) => console.error("Fail to Connect", err));
 
 //body-parse
-// app.use(express.json());
 app.use(bodyParser.json({limit: '50mb', extedned: true}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
@@ -26,6 +25,7 @@ app.use(cors());
 
 //routers
 app.use(router);
+
 app.get("/", async (req, res) => {
   res.json({
     message: "MeetCampus'e Hosgeldiniz !",

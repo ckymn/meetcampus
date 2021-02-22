@@ -1,14 +1,15 @@
 const { Schema , model} = require("mongoose");
 
 const post_scheme = new Schema({
-    name: {type:Schema.Types.String , required:true},
-    surname: {type:Schema.Types.String , required:true},
-    your_company: {type:Schema.Types.String},
-    location: {type:String},
-    tag: {type:Schema.Types.String, required:true},
-    image: {type:Schema.Types.String},
-    class: {type:Schema.Types.String},
-    linkedin: {type:Schema.Types.String, required:true},
+    name: {type:String , required:true},
+    surname: {type:String , required:true},
+    content:{type:String, required: true},
+    your_company: {type:String},
+    location: {type:String, required:true},
+    tag: {type:String, required:true},
+    image: {type:String},
+    class: {type:String},
+    linkedin: {type:String, required:true},
     createdAt: {
       type: Date,
       default: new Date(),

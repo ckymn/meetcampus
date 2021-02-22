@@ -1,7 +1,8 @@
 const model = require("../model");
+const joi = require('../../../util/joi');
 
 //-joi validation
-const scheme = global.joi.object({
+const scheme = joi.object({
   _id:joi.objectId().required(),
 }).options({ stripUnknown: true })
 

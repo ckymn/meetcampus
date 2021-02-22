@@ -2,23 +2,25 @@ const model = require("../model");
 const joi = require("../../../util/joi");
 
 //joi validation
-const scheme = global.joi
-  .object({
-    name: joi.string().max(24).default("").label("name_malformed"),
-    surname: joi.string().max(24).default("").label("surname_malformed"),
-  })
-  .options({ stripUnknown: true });
+// const scheme = joi.object({
+//     name: joi.string().max(24).required(),
+//     surname: joi.string().max(24).required(),
+//     content: joi.string().min(20).required(),
+//     your_company: joi.string().required(),
+//     linkedin: joi.string().uri().required(),
+//   })
+//   .options({ stripUnknown: true });
 
 const route = async (req, res) => {
+  const newPost = new model(req.body);
   try {
-    let { body } = req;
+    // let { body } = req;
     // const doesExist = await model.findOne({ id: _id });
     // if (doesExist)
-    //   throw createError.Conflict(`${id} is already been registered`);
-
-    const newPost = new model(body);
+    //   throw createError.Conflict(`${_id} is already been registered`);
     const savedPost = await newPost.save();
     res.status(201).json(savedPost); //hemen ekrana basiyor
+    
   } catch (error) {
     res.status(409).json({
       message: error.message,
@@ -27,6 +29,6 @@ const route = async (req, res) => {
 };
 
 module.exports = {
-  scheme,
+  // scheme,
   route,
 };
