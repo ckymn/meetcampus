@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PostsList = () => {
-  // get post mongodb
+  // get redux-store state values
   const posts = useSelector((state) => state.post.posts);
 
   // useState : for use state

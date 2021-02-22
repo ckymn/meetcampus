@@ -1,6 +1,8 @@
 import * as api from "../api/index";
 import * as types from "./types";
 
+//dispatch : asenkron programlarda ve component'ta useDispatch ile action cagirabiliyoruz
+
 export const fetchPosts = () => async (dispatch) => {
   try {
     const { data } = await api.fetchPosts();
@@ -59,4 +61,3 @@ export const deletePost = (id) => async (dispatch) => {
   }
 };
 
-// dispatch : bir middleware fonksiyonu donderiyor api degerlerini fonksiyon degilde obje olarak almamizi sagliyor

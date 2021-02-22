@@ -10,7 +10,11 @@ import {
   CardContent,
   CardActions,
   Typography,
+  Avatar,
+  CardHeader,
+  IconButton,
 } from "@material-ui/core";
+import ShareIcon from '@material-ui/icons/Share';
 import noImage from "../images/noimage.svg";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Post = ({ _id, title, subtitle, content, tag, image, createdAt }) => {
+const Post = ({ _id, name, surname, content, tag, location, your_company, linkedin,image, createdAt }) => {
   const classes = useStyles();
 
   const convertRelativeTime = (date) => {
@@ -45,31 +49,34 @@ const Post = ({ _id, title, subtitle, content, tag, image, createdAt }) => {
 
   return (
     <Card className={classes.root}>
+      <CardHeader avatar={<Avatar src={image}></Avatar>}
+        action={
+          <IconButton aria-label="settings">
+            <ShareIcon />
+          </IconButton>
+        }
+        title={name}
+        subheader={convertRelativeTime(createdAt)}
+      />
       <CardMedia
         className={classes.media}
         image={image || noImage}
-        title="Paella dish"
+        title={name}
       />
-      <div className={classes.overlay}>
-        <Typography variant="h6">Civan</Typography>
-        <Typography variant="body2">
-          {convertRelativeTime(createdAt)}
-        </Typography>
-      </div>
       <CardContent>
         <Typography variant="h6" component="p" gutterBottom>
-          {title}
+          {name} {surname}
         </Typography>{" "}
         <Typography variant="overline" component="p" gutterBottom>
-          {subtitle}
+          {location}
         </Typography>{" "}
         <Typography variant="body2" component="p">
           {content?.substring(0, 250) + "..."}
         </Typography>
-        <Chip label={`# ${tag}`} variant="outlined" className={classes.chip} />
+        <Chip label={`# ${tag}`} color="primary" className={classes.chip} />
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" variant="outlined" color="primary">
           <Link to={`/posts/${_id}`}>Daha Fazla</Link>
         </Button>
       </CardActions>

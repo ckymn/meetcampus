@@ -10,3 +10,5 @@ const store = createStore(
 );
 
 export default store;
+
+// {} : initial state
