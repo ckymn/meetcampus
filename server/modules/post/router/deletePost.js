@@ -7,9 +7,9 @@ const joi = require('../../../util/joi');
 // }).options({ stripUnknown: true })
 
 const route = async (req, res) => {
-  const { id} = req.params;
+  const {id} = req.params;
   try {
-    const deletedPost = await model.findByIdAndRemove(id);
+    const deletedPost = await model.findOneAndDelete({_id:id});
     res.json(deletedPost);
   } catch (error) {
     res.status(409).json({

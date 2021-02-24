@@ -17,6 +17,10 @@ router.post(
   // validation(post.createPost.scheme),
   post.createPost.route
 );
+router.patch(
+  `/posts:id`,
+  post.updatePost.route
+);
 router.delete(
   `/posts/:id`,
   // validation(post.deletePost.scheme),
