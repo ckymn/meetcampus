@@ -9,7 +9,7 @@ router.get(
 );
 router.get(
   "/posts/:id",
-  validation(post.getSinglePost.scheme),
+  // validation(post.getSinglePost.scheme),
   post.getSinglePost.route
 );
 router.post(
@@ -19,7 +19,7 @@ router.post(
 );
 router.delete(
   `/posts/:id`,
-  validation(post.deletePost.scheme),
+  // validation(post.deletePost.scheme),
   post.deletePost.route
 );
 

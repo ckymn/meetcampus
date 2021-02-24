@@ -2,14 +2,14 @@ const model = require("../model");
 const joi = require('../../../util/joi');
 
 //-joi validation
-const scheme = joi.object({
-  _id:joi.objectId().required(),
-}).options({ stripUnknown: true })
+// const scheme = joi.object({
+//   _id:joi.objectId().required(),
+// }).options({ stripUnknown: true })
 
 const route = async (req, res) => {
-  const { id: _id } = req.params;
+  const { id} = req.params;
   try {
-    const deletedPost = await Post.findByIdAndRemove(_id);
+    const deletedPost = await model.findByIdAndRemove(id);
     res.json(deletedPost);
   } catch (error) {
     res.status(409).json({
@@ -18,4 +18,7 @@ const route = async (req, res) => {
   }
 };
 
-module.exports = { scheme,route };
+module.exports = { 
+  // scheme,
+  route 
+};
