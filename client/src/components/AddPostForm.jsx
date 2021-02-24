@@ -50,7 +50,6 @@ const AddPostForm = ({ open, handleClose }) => {
   const onSubmit = (data) => {
     dispatch(createPost({ ...data, image: file })); //tum verileri ve resmi action'a gondermek
     clearForm();
-    console.log(data);
   };
 
   const clearForm = () => {

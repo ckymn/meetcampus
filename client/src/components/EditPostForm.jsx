@@ -37,7 +37,8 @@ const postSchema = yup.object().shape({
   sinif: yup.mixed().oneOf(sinif)
 });
 
-const EditPostForm = ({ history, post , closeEditPost }) => {
+const EditPostForm = ({post , closeEditMode }) => {
+
   const dispatch = useDispatch();
   const [file, setFile] = useState(post?.image);
   
@@ -52,19 +53,13 @@ const EditPostForm = ({ history, post , closeEditPost }) => {
       ...data,
       image: file
     };
+
     dispatch(updatePost(post._id, updatedPost));
 
     reset();
     setFile(null);
-    closeEditPost();
+    closeEditMode();
   };
-
-  console.log(post);
-  // const clearForm = () => {
-  //   reset();
-  //   setFile(null);
-  //   handleClose();
-  // };
 
   const classes = useStyles();
   return (
@@ -185,19 +180,20 @@ const EditPostForm = ({ history, post , closeEditPost }) => {
               multiple={false}
               onDone={({ base64 }) => setFile(base64)}
             />
-            <div style={{marginTop: "30px"}}>
+            <div style={{marginTop: "30px"}} >
                     <Button
-                      color="seondary"
+                      color="secondary"
                       variant="contained"
                       startIcon={<KeyboardBackspaceIcon />}
-                      onClick={closeEditPost}
+                      onClick={closeEditMode}
                     >
                       Give Up
                     </Button>{"  "}
                     <Button
-                      color="secondary"
+                      color="primary"
                       variant="contained"
                       startIcon={<SendIcon />}
+                      type="submit"
                     >
                       Save
                     </Button>
