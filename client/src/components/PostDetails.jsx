@@ -2,9 +2,21 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Paper, Divider, Button, Chip } from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+import {
+  Typography,
+  Paper,
+  Divider,
+  Button,
+  Chip,
+  Grid,
+  Avatar,
+  List,
+  ListItemText,
+  ListItem,
+  ListItemAvatar,
+} from "@material-ui/core";
+import EditLocationOutlinedIcon from "@material-ui/icons/EditLocationOutlined";
+import DeleteSweepTwoToneIcon from "@material-ui/icons/DeleteSweepTwoTone";
 import EditPostForm from "./EditPostForm";
 import { fetchSinglePost, deletePost } from "../actions/post";
 import noImage from "../images/noimage.svg";
@@ -22,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   image: {
-    width: "100%",
+    width: "35%",
     borderRadius: 5,
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(4),
@@ -34,13 +46,12 @@ const useStyles = makeStyles((theme) => ({
 
 // history , location , match/id : bunlar porps ile geliyor
 const PostDetails = ({ history, location, match }) => {
-  const { id } = match.params;
-
-  //get one post object
-  const currentPost = useSelector((state) => state.post.currentPost);
   const [editMode, setEditMode] = useState(false);
-
   const dispatch = useDispatch();
+
+  const { id } = match.params;
+  const currentPost = useSelector((state) => state.post.currentPost);
+
   //bu islem sadece sectigimiz bir degsiken degisince calisir
   useEffect(() => {
     dispatch(fetchSinglePost(id));
@@ -50,10 +61,10 @@ const PostDetails = ({ history, location, match }) => {
     return moment(date).fromNow();
   };
 
-// burda actionCreato fonksiyonunu firlaticaz
+  // burda actionCreato fonksiyonunu firlaticaz
   const removePost = () => {
     dispatch(deletePost(currentPost._id));
-    history.push("/posts");// burda post silinince /posts sayfasina gonderiyor
+    history.push("/posts"); // history'deki default url'i change ediyor
   };
 
   const openEditMode = () => {
@@ -66,62 +77,100 @@ const PostDetails = ({ history, location, match }) => {
 
   const classes = useStyles();
   return (
-    <Paper className={classes.paper} elevation={0}>
-      {editMode ? (
-        <EditPostForm post={currentPost} closeEditMode={closeEditMode} />
-      ) : (
-        <div>
-          <div className={classes.header}>
-            <Typography variant="h5" gutterBottom>
-              {currentPost?.title}
-            </Typography>
-            <div>
-              <Button
-                color="primary"
-                variant="outlined"
-                startIcon={<EditIcon />}
-                onClick={openEditMode}
-              >
-                Düzenle
-              </Button>{" "}
-              <Button
-                color="secondary"
-                variant="outlined"
-                onClick={removePost}
-                startIcon={<DeleteIcon />}
-              >
-                Sil
-              </Button>
-            </div>
-          </div>
+    <div>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6}>
+          <Paper className={classes.paper} elevation="15">
+            {editMode ? (
+              <EditPostForm post={currentPost} closeEditMode={closeEditMode} />
+            ) : (
+              <div>
+                <div className={classes.header}>
+                  <Typography variant="h5" gutterBottom>
+                    {`${currentPost?.name} ${currentPost?.surname}`}
+                  </Typography>
+                  <div>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      startIcon={<EditLocationOutlinedIcon />}
+                      onClick={openEditMode}
+                    >
+                      Edit
+                    </Button>{" "}
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      onClick={removePost}
+                      startIcon={<DeleteSweepTwoToneIcon />}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </div>
 
-          <Divider />
-          <Typography variant="overline" gutterBottom>
-            {currentPost?.subtitle}
-          </Typography>
-          <Typography variant="caption" component="p" gutterBottom>
-            {convertRelativeTime(currentPost?.createdAt)} by Didem
-          </Typography>
-          <Chip
-            label={`# ${currentPost?.tag}`}
-            variant="outlined"
-            className={classes.chip}
-          />
+                <Divider />
+                <Typography variant="caption" component="p" gutterBottom>
+                  {convertRelativeTime(currentPost?.createdAt)} by{" "}
+                  {currentPost?.name}
+                </Typography>
+                <Chip
+                  label={`# ${currentPost?.tag}`}
+                  color="primary"
+                  variant="default"
+                  className={classes.chip}
+                />
 
-          <div className={classes.content}>
-            <img
-              src={currentPost?.image || noImage}
-              alt="Post"
-              className={classes.image}
-            />
-            <Typography variant="body1" gutterBottom>
-              {currentPost?.content}
-            </Typography>
-          </div>
-        </div>
-      )}
-    </Paper>
+                <div className={classes.content}>
+                  <img
+                    src={currentPost?.image || noImage}
+                    alt="Post"
+                    className={classes.image}
+                  />
+                  <Typography variant="body1" gutterBottom>
+                    {currentPost?.content}
+                  </Typography>
+                </div>
+              </div>
+            )}
+          </Paper>
+        </Grid>
+        <Grid item xs={6} sm={6}>
+          <Paper className={classes.paper} elevation="15">
+            <List className={classes.root}>
+              <ListItem alignItems="flex-start">
+                <ListItemAvatar>
+                  <Avatar src={currentPost?.image} /> 
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <Typography variant="h5" color="primary">
+                      INFORMATION
+                    </Typography>
+                  }
+                  secondary={
+                    <React.Fragment>
+                      <Typography
+                        component="span"
+                        variant="overline"
+                        className={classes.inline}
+                        color="textPrimary"
+                      >
+                        {currentPost?.name}
+                      </Typography>
+                      {" — I'll be in your neighborhood doing errands this…"}
+                    </React.Fragment>
+                  }
+                />
+              </ListItem>
+            </List>
+          </Paper>
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 
 export default PostDetails;
+
+// ? : varsa

@@ -3,9 +3,12 @@ import { useDispatch } from "react-redux";
 import { fetchPosts } from "./actions/post";
 import {fade, makeStyles } from "@material-ui/core/styles";
 import {BrowserRouter as Router,Switch,Route,Redirect,} from "react-router-dom";
-import {Container,Grid,AppBar,Toolbar,Typography,Button,IconButton,} from "@material-ui/core";
+import {Container,Grid,AppBar,Toolbar,Typography,Button,IconButton,Paper} from "@material-ui/core";
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import PenIcon from "@material-ui/icons/Create";
+import Brightness4Icon from '@material-ui/icons/Brightness4';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import PostsList from "./components/PostsList";
@@ -70,9 +73,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const App = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
@@ -84,11 +90,19 @@ const App = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  
+  const theme = React.useMemo(()=>createMuiTheme({
+    palette: {
+      type: darkMode ? "dark" : "light",
+    },
+  }), [darkMode])
 
-  const classes = useStyles();
   return (
     <div className={classes.root}>
       <Container maxWidth="xl">
+        <ThemeProvider theme={theme}>
+        <CssBaseline/>
+        <Paper elevation="15">
         <AppBar position="static" color="primary" elevation={0}>
           <Toolbar>
             <IconButton
@@ -107,6 +121,9 @@ const App = () => {
             >
               <a href="http://localhost:3000/posts">MEETCAMPUS</a>
             </Typography>
+            <Button onClick={() => setDarkMode(!darkMode)}>
+              <Brightness4Icon/>
+            </Button>
             <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -130,6 +147,7 @@ const App = () => {
             </Button>
           </Toolbar>
         </AppBar>
+        </Paper>
         <Grid container className={classes.container}>
           <Grid item xs={12}>
             <Router>
@@ -142,8 +160,8 @@ const App = () => {
             </Router>
           </Grid>
         </Grid>
-
         <AddPostForm open={open} handleClose={handleClose} />
+        </ThemeProvider>
       </Container>
     </div>
   );

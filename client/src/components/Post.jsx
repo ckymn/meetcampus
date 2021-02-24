@@ -17,6 +17,7 @@ import {
 import ShareIcon from '@material-ui/icons/Share';
 import noImage from "../images/noimage.svg";
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 374,
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Post = ({ _id, name, surname, content, tag, location, your_company, linkedin,image, createdAt }) => {
   const classes = useStyles();
-
+  
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
   };
