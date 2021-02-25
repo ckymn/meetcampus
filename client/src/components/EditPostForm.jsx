@@ -53,7 +53,7 @@ const EditPostForm = ({ post, closeEditMode }) => {
   //data react-hook-form 'dan geliyor form submit olunca bir action dispatch edilecek
   const onSubmit = (data) => {
     console.log(data);
-    
+
     const updatedPost = {
       _id: post._id,
       ...data,
