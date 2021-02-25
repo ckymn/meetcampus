@@ -18,7 +18,7 @@ router.post(
   post.createPost.route
 );
 router.patch(
-  `/posts:id`,
+  `/posts/:id`,
   post.updatePost.route
 );
 router.delete(
