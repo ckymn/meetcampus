@@ -1,4 +1,4 @@
-import {fade, makeStyles } from "@material-ui/core/styles";
+import { fade, makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
   Toolbar,
@@ -69,8 +69,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar = ({handleOpen,darkMode,setDarkMode }) => {
+const NavBar = ({ handleOpen, darkMode, setDarkMode }) => {
   const classes = useStyles();
+  // const [search, setSearch] = useState("");
+  // const postsList = useSelector((state) => state.post.posts);
+
+  // const filterPost = () => {
+  //   const regex = new RegExp(search, "gi");
+  //   const result = [...postsList].reduce((acc, post) => {
+  //     if (
+  //       (post.value.name && post.value.name.match(regex)) ||
+  //       (post.value.tag && post.value.tag.match(regex))
+  //     )
+  //       acc.push(post);
+  //     return acc;
+  //   }, []);
+  //   return result;
+  // };
+
+  // const renderPosts = search !== "" ? filterPost : "";
 
   return (
     <div className={classes.root}>
@@ -103,6 +120,8 @@ const NavBar = ({handleOpen,darkMode,setDarkMode }) => {
                   input: classes.inputInput,
                 }}
                 inputProps={{ "aria-label": "search" }}
+                name="serach"
+               
               />
             </div>
             <Button

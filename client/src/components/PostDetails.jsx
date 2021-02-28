@@ -20,8 +20,18 @@ import DeleteSweepTwoToneIcon from "@material-ui/icons/DeleteSweepTwoTone";
 import EditPostForm from "./EditPostForm";
 import { fetchSinglePost, deletePost } from "../actions/post";
 import noImage from "../images/noimage.svg";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import BusinessIcon from "@material-ui/icons/Business";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import BookIcon from "@material-ui/icons/Book";
+import SchoolIcon from "@material-ui/icons/School";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
   paper: {
     padding: theme.spacing(3),
     marginBottom: theme.spacing(8),
@@ -41,6 +51,12 @@ const useStyles = makeStyles((theme) => ({
   },
   chip: {
     marginTop: theme.spacing(1),
+  },
+  secondary: {
+    light: "#ff7961",
+    main: "#f44336",
+    dark: "#ba000d",
+    contrastText: "#000",
   },
 }));
 
@@ -78,92 +94,163 @@ const PostDetails = ({ history, location, match }) => {
   const classes = useStyles();
   return (
     <div>
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper} elevation="15">
-            {editMode ? (
-              <EditPostForm post={currentPost} closeEditMode={closeEditMode} />
-            ) : (
-              <div>
-                <div className={classes.header}>
-                  <Typography variant="h5" gutterBottom>
-                    {`${currentPost?.name} ${currentPost?.surname}`}
+          <Grid container spacing={3}>
+            <Paper className={classes.paper} elevation="15">
+              {editMode ? (
+                <EditPostForm
+                  post={currentPost}
+                  closeEditMode={closeEditMode}
+                />
+              ) : (
+                <div>
+                  <div className={classes.header}>
+                    <Typography variant="h5" gutterBottom>
+                      {`${currentPost?.name} ${currentPost?.surname}`}
+                    </Typography>
+                    <div>
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        startIcon={<EditLocationOutlinedIcon />}
+                        onClick={openEditMode}
+                      >
+                        Edit
+                      </Button>{" "}
+                      <Button
+                        color="secondary"
+                        variant="contained"
+                        onClick={removePost}
+                        startIcon={<DeleteSweepTwoToneIcon />}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </div>
+
+                  <Divider />
+                  <Typography variant="caption" component="p" gutterBottom>
+                    {convertRelativeTime(currentPost?.createdAt)} by{" "}
+                    {currentPost?.name}
                   </Typography>
-                  <div>
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      startIcon={<EditLocationOutlinedIcon />}
-                      onClick={openEditMode}
-                    >
-                      Edit
-                    </Button>{" "}
-                    <Button
-                      color="secondary"
-                      variant="contained"
-                      onClick={removePost}
-                      startIcon={<DeleteSweepTwoToneIcon />}
-                    >
-                      Delete
-                    </Button>
+                  <Chip
+                    label={`# ${currentPost?.tag}`}
+                    color="primary"
+                    variant="default"
+                    className={classes.chip}
+                  />
+
+                  <div className={classes.content}>
+                    <img
+                      src={currentPost?.image || noImage}
+                      alt="Post"
+                      className={classes.image}
+                    />
+                    <Typography 
+                      variant="body1"
+                      align="justify"
+                      paragraph="true"
+                      variant="subtitle2"
+                      >
+                      {currentPost?.content}
+                    </Typography>
                   </div>
                 </div>
-
-                <Divider />
-                <Typography variant="caption" component="p" gutterBottom>
-                  {convertRelativeTime(currentPost?.createdAt)} by{" "}
-                  {currentPost?.name}
-                </Typography>
-                <Chip
-                  label={`# ${currentPost?.tag}`}
-                  color="primary"
-                  variant="default"
-                  className={classes.chip}
-                />
-
-                <div className={classes.content}>
-                  <img
-                    src={currentPost?.image || noImage}
-                    alt="Post"
-                    className={classes.image}
-                  />
-                  <Typography variant="body1" gutterBottom>
-                    {currentPost?.content}
-                  </Typography>
-                </div>
-              </div>
-            )}
-          </Paper>
+              )}
+            </Paper>
+          </Grid>
         </Grid>
-        <Grid item xs={6} sm={6}>
+        <Grid item xs={12} sm={6}>
           <Paper className={classes.paper} elevation="15">
             <List className={classes.root}>
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                  <Avatar src={currentPost?.image} /> 
+                  <Avatar src={currentPost?.image} />
                 </ListItemAvatar>
                 <ListItemText
                   primary={
-                    <Typography variant="h5" color="primary">
-                      INFORMATION
+                    <Typography
+                      component="span"
+                      variant="overline"
+                      color="inherit"
+                    >
+                      Reach {currentPost?.name}
                     </Typography>
-                  }
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        component="span"
-                        variant="overline"
-                        className={classes.inline}
-                        color="textPrimary"
-                      >
-                        {currentPost?.name}
-                      </Typography>
-                      {" — I'll be in your neighborhood doing errands this…"}
-                    </React.Fragment>
                   }
                 />
               </ListItem>
             </List>
+
+            <Grid
+              container
+              spacing={3}
+              direction="column"
+              justify="center"
+              alignItems="center"
+            >
+              <List className={classes.root}>
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar style={{backgroundColor:"blue"}}>
+                      <LinkedInIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary="Linkedin"
+                    secondary={currentPost?.createdAt}
+                  />
+                </ListItem>
+                <Divider variant="inset" component="li" />
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar style={{backgroundColor:"green"}}>
+                      <BusinessIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary="Company"
+                    secondary={currentPost?.createdAt}
+                  />
+                </ListItem>
+                <Divider variant="inset" component="li" />
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar style={{backgroundColor:"cyan"}}>
+                      <TwitterIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary="Twitter"
+                    secondary={currentPost?.createdAt}
+                  />
+                </ListItem>
+                <Divider variant="inset" component="li" />
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar style={{backgroundColor:"red"}}>
+                      <SchoolIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary="School"
+                    secondary={currentPost?.createdAt}
+                  />
+                </ListItem>
+                <Divider variant="inset" component="li" />
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar style={{backgroundColor:"fuchsia"}}>
+                      <BookIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary="Blog"
+                    secondary={currentPost?.createdAt}
+                  />
+                </ListItem>
+              </List>
+            </Grid>
           </Paper>
         </Grid>
       </Grid>
