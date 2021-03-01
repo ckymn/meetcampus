@@ -8,7 +8,7 @@ const joi = require("../../../util/joi");
 
 const route = async (req, res) => {
   let { params , body } = req; 
-  const { id } = params;
+  let { id } = params;
 
   const _deletedPost = await model.findOneAndDelete({ _id: id });
   if(!_deletedPost)

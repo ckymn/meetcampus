@@ -13,13 +13,13 @@ const joi = require("../../../util/joi");
 
 const route = async (req, res) => {
   let { params, body, _client } = req;
-  let  id  = req.body;
+  let { _id } = body;
+
   // save db
   let newPost = new model(body);
-
-  let doesExist = await newPost.findOne({ id: _id });
-  if (doesExist)
-    return res.status(404).json(`${_id} is already been registered`);
+  // let doesExist = await newPost.findById(_id);
+  // if (doesExist)
+  //   return res.status(404).json(`${_id} is already been registered`);
   
   let savedPost = await newPost.save(); 
   return res.status(201).json(savedPost);

@@ -7,8 +7,6 @@ const joi = require('../../../util/joi');
 // }).options({ stripUnknown: true })
 
 const route = async (req, res) => {
-  console.log(req.body);
-  
   const _posts = await model.find({});
   if(!_posts)
     return res.status(404).json("post_not_found");

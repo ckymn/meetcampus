@@ -1,6 +1,8 @@
 const model = require("../model");
 const joi = require("../../../util/joi");
 
+
+
 //-joi validation
 // const scheme = joi.object({
 //   _id:joi.objectId().required(),
@@ -8,9 +10,9 @@ const joi = require("../../../util/joi");
 
 const route = async (req, res) => {
   let { body, params} = req;
-  let { id: _id } = params;
+  let { id } = params;
   
-  const _post = await model.findById(_id);
+  const _post = await model.findById({_id: id});
   if (!_post) 
     return res.status(404).json("post_not_found");
   _post.set(body);

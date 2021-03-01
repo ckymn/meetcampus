@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(cors());
 
 //routers
-app.use(router);
+app.use("/meetcampus",router);
 
 app.get("/", async (req, res) => {
   res.json({
@@ -35,7 +35,7 @@ app.get("/", async (req, res) => {
 });
 
 //run
-const PORT = process.env.PORT||3003;
+const PORT = process.env.PORT||1000;
 app.listen(PORT, () => {
   console.log(`Connected localhost://${PORT}`);
 });
