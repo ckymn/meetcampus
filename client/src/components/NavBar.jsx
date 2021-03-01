@@ -59,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -114,14 +113,13 @@ const NavBar = ({ handleOpen, darkMode, setDarkMode }) => {
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder="Search…"
+                placeholder="Search...."
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
                 inputProps={{ "aria-label": "search" }}
                 name="serach"
-               
               />
             </div>
             <Button
@@ -130,7 +128,7 @@ const NavBar = ({ handleOpen, darkMode, setDarkMode }) => {
               startIcon={<PenIcon />}
               onClick={handleOpen}
             >
-              YOUR PROFILE
+              BİLGİLERİNİZ
             </Button>
           </Toolbar>
         </AppBar>

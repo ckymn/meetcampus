@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { Grid, Button } from "@material-ui/core";
-import Post from "./Post";
 import gridFour from "../images/grid_four.svg";
 import gridThree from "../images/grid_three.svg";
+import Post from "./Post";
 
 //hazir stiller
 const useStyles = makeStyles((theme) => ({
@@ -15,21 +15,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PostsList = () => {
+  const classes = useStyles();
+  const [layout, setLayout] = useState("gridThree");
+
   // get redux-store state values
   const posts = useSelector((state) => state.post.posts);
 
-  // useState : for use state
-  const [layout, setLayout] = useState("gridThree");
-
     // yatayda post sayisi
   const calculateMd = () => {
-    return layout === "gridThree" ? 4 : 3;
+    return layout === "gridThree" ? 3 : 4;
   };
 
-  const classes = useStyles();
-
   return (
-    <>
+    <div>
       {/* Layout Shifter */}
       <div className={classes.layoutShifter}>
         <Button
@@ -63,7 +61,7 @@ const PostsList = () => {
             </Grid>
           ))}
       </Grid>
-    </>
+    </div>
   );
 };
 

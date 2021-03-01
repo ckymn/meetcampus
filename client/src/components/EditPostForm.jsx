@@ -31,7 +31,7 @@ const tags = [
   "PhP",
   "ASP.Net",
 ];
-const sinif = ["Mezun", "1", "2", "3", "4"];
+const sinif = ["Mezun", "1", "2", "3", "4","Yuksek Lisans"];
 
 //validation
 const postSchema = yup.object().shape({
@@ -40,9 +40,18 @@ const postSchema = yup.object().shape({
   content: yup.string().min(20).required(),
   tag: yup.mixed().oneOf(tags),
   sinif: yup.mixed().oneOf(sinif),
+  twitter:yup.string().url(),
+  linkedin: yup.string().url(),
+  company: yup.string().required(),
+  school: yup.string().required(),
+  blog: yup.string().url(),
+  createdOn: yup.date().default(function() {
+    return new Date();
+  }),
 });
 
 const EditPostForm = ({ post, closeEditMode }) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const [file, setFile] = useState(post?.image);
 
@@ -67,7 +76,6 @@ const EditPostForm = ({ post, closeEditMode }) => {
     closeEditMode();
   };
 
-  const classes = useStyles();
   return (
     <div>
       <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
@@ -121,6 +129,17 @@ const EditPostForm = ({ post, closeEditMode }) => {
           id="linkedin"
           label="account"
           name="linkedin"
+          variant="outlined"
+          className={classes.textField}
+          size="small"
+          inputRef={register}
+          fullWidth
+          defaultValue={post.linkedin}
+        />
+        <TextField
+          id="twitter"
+          label="account"
+          name="twitter"
           variant="outlined"
           className={classes.textField}
           size="small"

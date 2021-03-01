@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Post = ({ _id, name, surname, content, tag, location, your_company, linkedin,image, createdAt }) => {
+const Post = ({}) => {
   const classes = useStyles();
   
   const convertRelativeTime = (date) => {
@@ -50,35 +50,35 @@ const Post = ({ _id, name, surname, content, tag, location, your_company, linked
 
   return (
     <Card className={classes.root}>
-      <CardHeader avatar={<Avatar src={image}></Avatar>}
+      <CardHeader avatar={<Avatar src={props?.image}></Avatar>}
         action={
           <IconButton aria-label="settings">
             <ShareIcon />
           </IconButton>
         }
-        title={name}
-        subheader={convertRelativeTime(createdAt)}
+        title={props?.name}
+        subheader={convertRelativeTime(props?.createdAt)}
       />
       <CardMedia
         className={classes.media}
-        image={image || noImage}
-        title={name}
+        image={props?.image || noImage}
+        title={props?.name}
       />
       <CardContent>
         <Typography variant="h6" component="p" gutterBottom>
-          {name} {surname}
+          {props?.name} {props?.surname}
         </Typography>{" "}
         <Typography variant="overline" component="p" gutterBottom>
-          {location}
+          {props?.location}
         </Typography>{" "}
         <Typography variant="body2" component="p">
-          {content?.substring(0, 250) + "..."}
+          {props?.content?.substring(0, 250) + "..."}
         </Typography>
-        <Chip label={`# ${tag}`} color="primary" className={classes.chip} />
+        <Chip label={`# ${props?.tag}`} color="primary" className={classes.chip} />
       </CardContent>
       <CardActions>
         <Button size="small" variant="outlined" color="primary">
-          <Link to={`/posts/${_id}`}>Daha Fazla</Link>
+          <Link to={`/posts/${props?._id}`}>Daha Fazla</Link>
         </Button>
       </CardActions>
     </Card>

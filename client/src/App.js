@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchPosts } from "./actions/post";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import {
   BrowserRouter as Router,
@@ -16,6 +15,7 @@ import AddPostForm from "./components/AddPostForm";
 import PostDetails from "./components/PostDetails";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
+import { fetchPosts } from "./actions/post";
 
 const useStyles = makeStyles((theme) => ({
   root: {

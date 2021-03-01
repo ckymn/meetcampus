@@ -29,26 +29,38 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const tags = ["C","C++","C#","Java","Pyhton","JavaScript","GO","Dart","Android","Flutter","PhP", "ASP.Net",];
-const sinif = ["Mezun", "1","2","3","4"];
+const sinif = ["Mezun", "1","2","3","4","Yuksek Lisans"];
 
 const postSchema = yup.object().shape({
   name: yup.string().max(30).required(),
   surname: yup.string().max(30).required(),
   content: yup.string().min(20).required(),
   tag: yup.mixed().oneOf(tags),
-  sinif: yup.mixed().oneOf(sinif)
+  sinif: yup.mixed().oneOf(sinif),
+  twitter:yup.string().url(),
+  linkedin: yup.string().url(),
+  company: yup.string().required(),
+  school: yup.string().required(),
+  blog: yup.string().url(),
+  createdOn: yup.date().default(function() {
+    return new Date();
+  }),
+
 });
 
 const AddPostForm = ({ open, handleClose }) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const [file, setFile] = useState(null);
   
+  // useForm yup
   const { register, handleSubmit, control, errors, reset } = useForm({
     resolver: yupResolver(postSchema),
   });
+
   //data react-hook-form 'dan geliyor form submit olunca bir action dispatch edilecek
   const onSubmit = (data) => {
-    dispatch(createPost({ ...data, image: file })); //tum verileri ve resmi action'a gondermek
+    dispatch(createPost({ ...data, image: file })); 
     clearForm();
   };
 
@@ -58,7 +70,6 @@ const AddPostForm = ({ open, handleClose }) => {
     handleClose();
   };
 
-  const classes = useStyles();
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle> Yeni Yazı Oluştur</DialogTitle>
@@ -68,7 +79,6 @@ const AddPostForm = ({ open, handleClose }) => {
         </DialogContentText>
         <div className={classes.root}>
           <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-           
             <TextField
               id="name"
               label="name"
@@ -89,6 +99,19 @@ const AddPostForm = ({ open, handleClose }) => {
               size="small"
               inputRef={register}
               error={errors.surname ? true : false}
+              fullWidth
+            />
+            <TextField
+              id="content"
+              label="İçerik"
+              name="content"
+              multiline
+              size="small"
+              inputRef={register}
+              rows={4}
+              className={classes.textField}
+              variant="outlined"
+              error={errors.content ? true : false}
               fullWidth
             />
              <TextField
@@ -115,6 +138,36 @@ const AddPostForm = ({ open, handleClose }) => {
               id="linkedin"
               label="account"
               name="linkedin"
+              variant="outlined"
+              className={classes.textField}
+              size="small"
+              inputRef={register}
+              fullWidth
+            />
+            <TextField
+              id="twitter"
+              label="account"
+              name="twitter"
+              variant="outlined"
+              className={classes.textField}
+              size="small"
+              inputRef={register}
+              fullWidth
+            />
+            <TextField
+              id="school"
+              label="school"
+              name="school"
+              variant="outlined"
+              className={classes.textField}
+              size="small"
+              inputRef={register}
+              fullWidth
+            />
+            <TextField
+              id="blog"
+              label="blog"
+              name="blog"
               variant="outlined"
               className={classes.textField}
               size="small"
@@ -160,21 +213,6 @@ const AddPostForm = ({ open, handleClose }) => {
               error={errors.tag ? true : false}
               defaultValue={tags[0]}
             />
-
-            <TextField
-              id="content"
-              label="İçerik"
-              name="content"
-              multiline
-              size="small"
-              inputRef={register}
-              rows={4}
-              className={classes.textField}
-              variant="outlined"
-              error={errors.content ? true : false}
-              fullWidth
-            />
-
             <FileBase64
               multiple={false}
               onDone={({ base64 }) => setFile(base64)}
@@ -182,6 +220,7 @@ const AddPostForm = ({ open, handleClose }) => {
           </form>
         </div>
       </DialogContent>
+
       <DialogActions>
         <Button onClick={clearForm} variant="outlined" color="primary">
           Vazgeç

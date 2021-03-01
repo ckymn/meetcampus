@@ -1,0 +1,19 @@
+meetcampus Change Client idea:
+-----------------------------------
+
+1-AddPostForm / form change
+2-AddPostForm / select change
+3-AddPostForm / fileBase64 change
+4-NavBar / search change
+5-NavBar / select profile(ogretim gorevlisi, ogrenci) add
+6-HomePage / meetcampus show add
+7-AddPostForm and EditPostForm / tag and class get other collection change [ *orn: oneDate'i zamannin yerine kullanmak]
+8-Post / card color change
+
+
+meetcampus Change Server idea: 
+--------------------------------------
+1- createPost / post add server change
+2- fetchPost - createPost etc. / js-error controller change
+3- fetchPost / posts/342148932098 yerine posts/muhammetCokyaman change / not params - yes query
+4- createPost/ id controller bug solution

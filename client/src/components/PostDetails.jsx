@@ -17,7 +17,6 @@ import {
 } from "@material-ui/core";
 import EditLocationOutlinedIcon from "@material-ui/icons/EditLocationOutlined";
 import DeleteSweepTwoToneIcon from "@material-ui/icons/DeleteSweepTwoTone";
-import EditPostForm from "./EditPostForm";
 import { fetchSinglePost, deletePost } from "../actions/post";
 import noImage from "../images/noimage.svg";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
@@ -25,6 +24,7 @@ import BusinessIcon from "@material-ui/icons/Business";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import BookIcon from "@material-ui/icons/Book";
 import SchoolIcon from "@material-ui/icons/School";
+import EditPostForm from "./EditPostForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,19 +69,19 @@ const PostDetails = ({ history, location, match }) => {
   const currentPost = useSelector((state) => state.post.currentPost);
   console.log(currentPost);
 
-  //bu islem sadece sectigimiz bir degsiken degisince calisir
   useEffect(() => {
     dispatch(fetchSinglePost(id));
   }, [dispatch, id]);
 
+  // time
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
   };
 
-  // burda actionCreato fonksiyonunu firlaticaz
+  // actionCreateor
   const removePost = () => {
     dispatch(deletePost(currentPost._id));
-    history.push("/posts"); // history'deki default url'i change ediyor
+    history.push("/posts"); // url cahange
   };
 
   const openEditMode = () => {
