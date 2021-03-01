@@ -67,6 +67,7 @@ const PostDetails = ({ history, location, match }) => {
 
   const { id } = match.params;
   const currentPost = useSelector((state) => state.post.currentPost);
+  console.log(currentPost);
 
   //bu islem sadece sectigimiz bir degsiken degisince calisir
   useEffect(() => {
@@ -147,12 +148,12 @@ const PostDetails = ({ history, location, match }) => {
                       alt="Post"
                       className={classes.image}
                     />
-                    <Typography 
+                    <Typography
                       variant="body1"
                       align="justify"
                       paragraph="true"
                       variant="subtitle2"
-                      >
+                    >
                       {currentPost?.content}
                     </Typography>
                   </div>
@@ -192,8 +193,10 @@ const PostDetails = ({ history, location, match }) => {
               <List className={classes.root}>
                 <ListItem>
                   <ListItemAvatar>
-                    <Avatar style={{backgroundColor:"blue"}}>
-                      <LinkedInIcon />
+                    <Avatar>
+                      <Button style={{ backgroundColor: "blue" }}>
+                        <LinkedInIcon />
+                      </Button>
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
@@ -204,20 +207,24 @@ const PostDetails = ({ history, location, match }) => {
                 <Divider variant="inset" component="li" />
                 <ListItem>
                   <ListItemAvatar>
-                    <Avatar style={{backgroundColor:"green"}}>
+                    <Avatar>
+                    <Button style={{ backgroundColor: "green" }}>
                       <BusinessIcon />
+                    </Button>
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
                     primary="Company"
-                    secondary={currentPost?.createdAt}
+                    secondary={`${currentPost?.createdAt}`}
                   />
                 </ListItem>
                 <Divider variant="inset" component="li" />
                 <ListItem>
                   <ListItemAvatar>
-                    <Avatar style={{backgroundColor:"cyan"}}>
-                      <TwitterIcon />
+                    <Avatar>
+                      <Button style={{ backgroundColor: "cyan"}}>
+                        <TwitterIcon />
+                      </Button>
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
@@ -228,8 +235,10 @@ const PostDetails = ({ history, location, match }) => {
                 <Divider variant="inset" component="li" />
                 <ListItem>
                   <ListItemAvatar>
-                    <Avatar style={{backgroundColor:"red"}}>
-                      <SchoolIcon />
+                  <Avatar>
+                      <Button style={{ backgroundColor: "red"}}>
+                        <SchoolIcon />
+                      </Button>
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
@@ -240,8 +249,13 @@ const PostDetails = ({ history, location, match }) => {
                 <Divider variant="inset" component="li" />
                 <ListItem>
                   <ListItemAvatar>
-                    <Avatar style={{backgroundColor:"fuchsia"}}>
-                      <BookIcon />
+                    <Avatar>
+                      <Button 
+                        style={{ backgroundColor: "fuchsia"}}
+                        href={`${currentPost?.linkedin}`}
+                        >
+                        <BookIcon />
+                      </Button>
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText

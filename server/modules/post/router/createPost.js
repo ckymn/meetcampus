@@ -12,7 +12,8 @@ const joi = require("../../../util/joi");
 //   .options({ stripUnknown: true });
 
 const route = async (req, res) => {
-  const newPost = new model(req.body);
+  let { params, body } = req;
+  let newPost = new model(body);
   try {
     // let { body } = req;
     // const doesExist = await model.findOne({ id: _id });

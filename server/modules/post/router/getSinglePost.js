@@ -7,7 +7,8 @@ const joi = require('../../../util/joi');
 // }).options({ stripUnknown: true })
 
 const route = async (req, res) => {
-  const { id } = req.params;
+  let { params, body } = req;
+  let { id } = params;
   try {
     const post = await model.findById(id);
     res.status(200).json(post);
