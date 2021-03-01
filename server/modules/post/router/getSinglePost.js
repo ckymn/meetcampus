@@ -9,14 +9,12 @@ const joi = require('../../../util/joi');
 const route = async (req, res) => {
   let { params, body } = req;
   let { id } = params;
-  try {
-    const post = await model.findById(id);
-    res.status(200).json(post);
-  } catch (error) {
-    res.status(404).json({
-      message: error.message,
-    });
-  }
+  
+    const _post = await model.findById(id);
+    if(!_post)
+      return res.status(404).send("post_not_found");
+    return res.status(200).json(_post);
+ 
 };
 
 module.exports = { 

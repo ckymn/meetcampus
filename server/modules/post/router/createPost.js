@@ -12,21 +12,23 @@ const joi = require("../../../util/joi");
 //   .options({ stripUnknown: true });
 
 const route = async (req, res) => {
-  let { params, body } = req;
+  let { params, body, _client } = req;
+  let  id  = req.body;
+  // save db
   let newPost = new model(body);
-  try {
-    // let { body } = req;
-    // const doesExist = await model.findOne({ id: _id });
-    // if (doesExist)
-    //   throw createError.Conflict(`${_id} is already been registered`);
-    const savedPost = await newPost.save();
-    res.status(201).json(savedPost); //hemen ekrana basiyor
+
+  let doesExist = await newPost.findOne({ id: _id });
+  if (doesExist)
+    return res.status(404).json(`${_id} is already been registered`);
+  
+  let savedPost = await newPost.save(); 
+  return res.status(201).json(savedPost);
     
-  } catch (error) {
-    res.status(409).json({
-      message: error.message,
-    });
-  }
+  //veya 
+  /**
+   * _client = await _client.set({body}).save();
+   * return res.send(_client);
+   */
 };
 
 module.exports = {

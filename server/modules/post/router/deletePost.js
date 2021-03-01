@@ -1,5 +1,5 @@
 const model = require("../model");
-const joi = require('../../../util/joi');
+const joi = require("../../../util/joi");
 
 //-joi validation
 // const scheme = joi.object({
@@ -7,18 +7,16 @@ const joi = require('../../../util/joi');
 // }).options({ stripUnknown: true })
 
 const route = async (req, res) => {
-  const {id} = req.params;
-  try {
-    const deletedPost = await model.findOneAndDelete({_id:id});
-    res.json(deletedPost);
-  } catch (error) {
-    res.status(409).json({
-      message: error.message,
-    });
-  }
+  let { params , body } = req; 
+  const { id } = params;
+
+  const _deletedPost = await model.findOneAndDelete({ _id: id });
+  if(!_deletedPost)
+    return res.status(404).json("post_not_found");
+  return res.json(_deletedPost);
 };
 
-module.exports = { 
+module.exports = {
   // scheme,
-  route 
+  route,
 };
