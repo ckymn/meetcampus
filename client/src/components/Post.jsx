@@ -41,44 +41,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Post = ({}) => {
+const Post = ({name,surname,location,tag,content,_id,image,createdAt,}) => {
   const classes = useStyles();
-  
+  console.log(name);
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
   };
 
   return (
     <Card className={classes.root}>
-      <CardHeader avatar={<Avatar src={props?.image}></Avatar>}
+      <CardHeader avatar={<Avatar src={image}></Avatar>}
         action={
           <IconButton aria-label="settings">
             <ShareIcon />
           </IconButton>
         }
-        title={props?.name}
-        subheader={convertRelativeTime(props?.createdAt)}
+        title={name}
+        subheader={convertRelativeTime(createdAt)}
       />
       <CardMedia
         className={classes.media}
-        image={props?.image || noImage}
-        title={props?.name}
+        image={image || noImage}
+        title={name}
       />
       <CardContent>
         <Typography variant="h6" component="p" gutterBottom>
-          {props?.name} {props?.surname}
+          {name} {surname}
         </Typography>{" "}
         <Typography variant="overline" component="p" gutterBottom>
-          {props?.location}
+          {location}
         </Typography>{" "}
         <Typography variant="body2" component="p">
-          {props?.content?.substring(0, 250) + "..."}
+          {content?.substring(0, 200) + "..."}
         </Typography>
-        <Chip label={`# ${props?.tag}`} color="primary" className={classes.chip} />
+        <Chip label={`# ${tag}`} color="primary" className={classes.chip} />
       </CardContent>
       <CardActions>
         <Button size="small" variant="outlined" color="primary">
-          <Link to={`/posts/${props?._id}`}>Daha Fazla</Link>
+          <Link to={`/posts/${_id}`}>Daha Fazla</Link>
         </Button>
       </CardActions>
     </Card>

@@ -1,8 +1,6 @@
 const model = require("../model");
 const joi = require("../../../util/joi");
 
-
-
 //-joi validation
 // const scheme = joi.object({
 //   _id:joi.objectId().required(),

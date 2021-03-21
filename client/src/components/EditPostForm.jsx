@@ -31,7 +31,7 @@ const tags = [
   "PhP",
   "ASP.Net",
 ];
-const sinif = ["Mezun", "1", "2", "3", "4","Yuksek Lisans"];
+const sinif = ["Mezun", "1", "2", "3", "4", "Yuksek Lisans"];
 
 //validation
 const postSchema = yup.object().shape({
@@ -40,12 +40,12 @@ const postSchema = yup.object().shape({
   content: yup.string().min(20).required(),
   tag: yup.mixed().oneOf(tags),
   sinif: yup.mixed().oneOf(sinif),
-  twitter:yup.string().url(),
+  twitter: yup.string().url(),
   linkedin: yup.string().url(),
   company: yup.string().required(),
   school: yup.string().required(),
   blog: yup.string().url(),
-  createdOn: yup.date().default(function() {
+  createdOn: yup.date().default(function () {
     return new Date();
   }),
 });
@@ -105,7 +105,7 @@ const EditPostForm = ({ post, closeEditMode }) => {
         />
         <TextField
           id="your_company"
-          label="company"
+          label="your company"
           name="your_company"
           variant="outlined"
           className={classes.textField}
@@ -127,7 +127,7 @@ const EditPostForm = ({ post, closeEditMode }) => {
         />
         <TextField
           id="linkedin"
-          label="account"
+          label="linkedin account"
           name="linkedin"
           variant="outlined"
           className={classes.textField}
@@ -138,7 +138,7 @@ const EditPostForm = ({ post, closeEditMode }) => {
         />
         <TextField
           id="twitter"
-          label="account"
+          label="twitter account"
           name="twitter"
           variant="outlined"
           className={classes.textField}
@@ -146,6 +146,28 @@ const EditPostForm = ({ post, closeEditMode }) => {
           inputRef={register}
           fullWidth
           defaultValue={post.linkedin}
+        />
+        <TextField
+          id="school"
+          label="school"
+          name="school"
+          variant="outlined"
+          className={classes.textField}
+          size="small"
+          inputRef={register}
+          fullWidth
+          defaultValue={post.school}
+        />
+        <TextField
+          id="blog"
+          label="blog"
+          name="blog"
+          variant="outlined"
+          className={classes.textField}
+          size="small"
+          inputRef={register}
+          fullWidth
+          defaultValue={post.blog}
         />
         <Controller
           as={
@@ -181,7 +203,7 @@ const EditPostForm = ({ post, closeEditMode }) => {
 
         <TextField
           id="content"
-          label="İçerik"
+          label="your about"
           name="content"
           multiline
           size="small"
@@ -195,10 +217,10 @@ const EditPostForm = ({ post, closeEditMode }) => {
         />
         <FileBase64 multiple={false} onDone={({ base64 }) => setFile(base64)} />
         <div className={classes.buttons}>
-          <Button color="primary" variant="outlined" onClick={closeEditMode}>
+          <Button color="primary" variant="contained" onClick={closeEditMode}>
             Give Up
           </Button>{" "}
-          <Button color="secondary" variant="outlined" type="submit">
+          <Button color="secondary" variant="contained" type="submit">
             Update
           </Button>
         </div>

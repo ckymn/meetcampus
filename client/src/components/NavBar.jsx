@@ -81,12 +81,12 @@ const NavBar = ({ handleOpen, darkMode, setDarkMode }) => {
   //       (post.value.tag && post.value.tag.match(regex))
   //     )
   //       acc.push(post);
-  //     return acc;
+  //     return console.log(acc);
   //   }, []);
   //   return result;
   // };
 
-  // const renderPosts = search !== "" ? filterPost : "";
+  // const renderPosts = search !== "" ? filterPost() : "";
 
   return (
     <div className={classes.root}>

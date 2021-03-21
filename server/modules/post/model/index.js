@@ -10,6 +10,9 @@ const post_scheme = new Schema({
     image: {type:String},
     class: {type:String},
     linkedin: {type:String, required:true},
+    twitter: {type:String , required:true},
+    school: {type:String},
+    blog:{type:String},
     createdAt: {
       type: Date,
       default: new Date(),

@@ -6,36 +6,41 @@ const dotenv = require("dotenv");
 const app = express();
 const bodyParser = require('body-parser');
 dotenv.config();
+const logger  = require("./middleware/logger");
 
 //db
 mongoose
   .connect(process.env.CONNECTION_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
     useFindAndModify: false,
   })
   .then(() => console.log("MongoDb connected ..."))
   .catch((err) => console.error("Fail to Connect", err));
 
-//body-parse
+//mid. third-party
+app.use(cors());
+//mid. third-party
 app.use(bodyParser.json({limit: '50mb', extedned: true}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
-
-// good http req
-app.use(cors());
+//mid. customer
+// app.use(logger);
 
 //routers
-app.use("/meetcampus",router);
+app.use(router);
 
-app.get("/", async (req, res) => {
+app.get("/", logger,async (req, res) => {
   res.json({
     message: "MeetCampus'e Hosgeldiniz !",
     status: 200,
   });
 });
 
+//err. handling
+
 //run
-const PORT = process.env.PORT||1000;
+const PORT = process.env.PORT||5000;
 app.listen(PORT, () => {
   console.log(`Connected localhost://${PORT}`);
 });

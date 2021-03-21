@@ -97,70 +97,64 @@ const PostDetails = ({ history, location, match }) => {
     <div>
       <Grid container spacing={4}>
         <Grid item xs={12} sm={6}>
-          <Grid container spacing={3}>
-            <Paper className={classes.paper} elevation="15">
-              {editMode ? (
-                <EditPostForm
-                  post={currentPost}
-                  closeEditMode={closeEditMode}
-                />
-              ) : (
-                <div>
-                  <div className={classes.header}>
-                    <Typography variant="h5" gutterBottom>
-                      {`${currentPost?.name} ${currentPost?.surname}`}
-                    </Typography>
-                    <div>
-                      <Button
-                        color="primary"
-                        variant="contained"
-                        startIcon={<EditLocationOutlinedIcon />}
-                        onClick={openEditMode}
-                      >
-                        Edit
-                      </Button>{" "}
-                      <Button
-                        color="secondary"
-                        variant="contained"
-                        onClick={removePost}
-                        startIcon={<DeleteSweepTwoToneIcon />}
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                  </div>
-
-                  <Divider />
-                  <Typography variant="caption" component="p" gutterBottom>
-                    {convertRelativeTime(currentPost?.createdAt)} by{" "}
-                    {currentPost?.name}
+          <Paper className={classes.paper} elevation="15">
+            {editMode ? (
+              <EditPostForm post={currentPost} closeEditMode={closeEditMode} />
+            ) : (
+              <div>
+                <div className={classes.header}>
+                  <Typography variant="h5" gutterBottom>
+                    {`${currentPost?.name} ${currentPost?.surname}`}
                   </Typography>
-                  <Chip
-                    label={`# ${currentPost?.tag}`}
-                    color="primary"
-                    variant="default"
-                    className={classes.chip}
-                  />
-
-                  <div className={classes.content}>
-                    <img
-                      src={currentPost?.image || noImage}
-                      alt="Post"
-                      className={classes.image}
-                    />
-                    <Typography
-                      variant="body1"
-                      align="justify"
-                      paragraph="true"
-                      variant="subtitle2"
+                  <div>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      startIcon={<EditLocationOutlinedIcon />}
+                      onClick={openEditMode}
                     >
-                      {currentPost?.content}
-                    </Typography>
+                      Edit
+                    </Button>{" "}
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      onClick={removePost}
+                      startIcon={<DeleteSweepTwoToneIcon />}
+                    >
+                      Delete
+                    </Button>
                   </div>
                 </div>
-              )}
-            </Paper>
-          </Grid>
+
+                <Divider />
+                <Typography variant="caption" component="p" gutterBottom>
+                  {convertRelativeTime(currentPost?.createdAt)} by{" "}
+                  {currentPost?.name}
+                </Typography>
+                <Chip
+                  label={`# ${currentPost?.tag}`}
+                  color="primary"
+                  variant="default"
+                  className={classes.chip}
+                />
+
+                <div className={classes.content}>
+                  <img
+                    src={currentPost?.image || noImage}
+                    alt="Post"
+                    className={classes.image}
+                  />
+                  <Typography
+                    align="justify"
+                    paragraph="true"
+                    variant="subtitle2"
+                  >
+                    {currentPost?.content}
+                  </Typography>
+                </div>
+              </div>
+            )}
+          </Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Paper className={classes.paper} elevation="15">
@@ -194,7 +188,10 @@ const PostDetails = ({ history, location, match }) => {
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>
-                      <Button style={{ backgroundColor: "blue" }}>
+                      <Button
+                        style={{ backgroundColor: "blue" }}
+                        href={`${currentPost?.linkedin}`}
+                      >
                         <LinkedInIcon />
                       </Button>
                     </Avatar>
@@ -208,21 +205,24 @@ const PostDetails = ({ history, location, match }) => {
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>
-                    <Button style={{ backgroundColor: "green" }}>
-                      <BusinessIcon />
-                    </Button>
+                      <Button style={{ backgroundColor: "green" }}>
+                        <BusinessIcon />
+                      </Button>
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
                     primary="Company"
-                    secondary={`${currentPost?.createdAt}`}
+                    secondary={`${currentPost?.your_company}`}
                   />
                 </ListItem>
                 <Divider variant="inset" component="li" />
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>
-                      <Button style={{ backgroundColor: "cyan"}}>
+                      <Button
+                        style={{ backgroundColor: "cyan" }}
+                        href={`${currentPost?.twitter}`}
+                      >
                         <TwitterIcon />
                       </Button>
                     </Avatar>
@@ -235,25 +235,22 @@ const PostDetails = ({ history, location, match }) => {
                 <Divider variant="inset" component="li" />
                 <ListItem>
                   <ListItemAvatar>
-                  <Avatar>
-                      <Button style={{ backgroundColor: "red"}}>
+                    <Avatar>
+                      <Button style={{ backgroundColor: "red" }}>
                         <SchoolIcon />
                       </Button>
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
                     primary="School"
-                    secondary={currentPost?.createdAt}
+                    secondary={currentPost?.school}
                   />
                 </ListItem>
                 <Divider variant="inset" component="li" />
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>
-                      <Button 
-                        style={{ backgroundColor: "fuchsia"}}
-                        href={`${currentPost?.linkedin}`}
-                        >
+                      <Button style={{ backgroundColor: "fuchsia" }} c>
                         <BookIcon />
                       </Button>
                     </Avatar>

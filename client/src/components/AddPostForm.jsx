@@ -18,6 +18,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { createPost } from "../actions/post";
+// const schools = require("../school");
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,8 +29,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const tags = ["C","C++","C#","Java","Pyhton","JavaScript","GO","Dart","Android","Flutter","PhP", "ASP.Net",];
-const sinif = ["Mezun", "1","2","3","4","Yuksek Lisans"];
+const tags = [
+  "C",
+  "C++",
+  "C#",
+  "Java",
+  "Pyhton",
+  "JavaScript",
+  "GO",
+  "Dart",
+  "Android",
+  "Flutter",
+  "PhP",
+  "ASP.Net",
+];
+const sinif = ["Mezun", "1", "2", "3", "4", "Yuksek Lisans"];
 
 const postSchema = yup.object().shape({
   name: yup.string().max(30).required(),
@@ -37,22 +51,28 @@ const postSchema = yup.object().shape({
   content: yup.string().min(20).required(),
   tag: yup.mixed().oneOf(tags),
   sinif: yup.mixed().oneOf(sinif),
-  twitter:yup.string().url(),
-  linkedin: yup.string().url(),
-  company: yup.string().required(),
+  // twitter:yup.string().url(),
+  // linkedin: yup.string().url(),
+  // company: yup.string().required(),
   school: yup.string().required(),
-  blog: yup.string().url(),
-  createdOn: yup.date().default(function() {
-    return new Date();
-  }),
-
+  // blog: yup.string().url(),
 });
 
-const AddPostForm = ({ open, handleClose }) => {
+const AddPostForm = ({ open, handleClose, props }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [file, setFile] = useState(null);
-  
+
+  //schools
+  // const getSchools = (schools) => {
+  //   let a = schools.map((liste) => liste);
+
+  //   for (let i = 0; i <= a.length; i++) {
+  //     const res = a[i].universities.map((list) => list.name);
+  //     return res;
+  //   }
+  // };
+
   // useForm yup
   const { register, handleSubmit, control, errors, reset } = useForm({
     resolver: yupResolver(postSchema),
@@ -60,7 +80,7 @@ const AddPostForm = ({ open, handleClose }) => {
 
   //data react-hook-form 'dan geliyor form submit olunca bir action dispatch edilecek
   const onSubmit = (data) => {
-    dispatch(createPost({ ...data, image: file })); 
+    dispatch(createPost({ ...data, image: file }));
     clearForm();
   };
 
@@ -75,7 +95,8 @@ const AddPostForm = ({ open, handleClose }) => {
       <DialogTitle> Yeni Yazı Oluştur</DialogTitle>
       <DialogContent>
         <DialogContentText>
-        Buraya yeni gelecek arkadaslar icin kenid bilgilerinizi doldurunuz lutfen !
+          Buraya yeni gelecek arkadaslar icin kenid bilgilerinizi doldurunuz
+          lutfen !
         </DialogContentText>
         <div className={classes.root}>
           <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
@@ -102,19 +123,6 @@ const AddPostForm = ({ open, handleClose }) => {
               fullWidth
             />
             <TextField
-              id="content"
-              label="İçerik"
-              name="content"
-              multiline
-              size="small"
-              inputRef={register}
-              rows={4}
-              className={classes.textField}
-              variant="outlined"
-              error={errors.content ? true : false}
-              fullWidth
-            />
-             <TextField
               id="your_company"
               label="company"
               name="your_company"
@@ -124,7 +132,7 @@ const AddPostForm = ({ open, handleClose }) => {
               inputRef={register}
               fullWidth
             />
-              <TextField
+            <TextField
               id="location"
               label="location"
               name="location"
@@ -134,9 +142,9 @@ const AddPostForm = ({ open, handleClose }) => {
               inputRef={register}
               fullWidth
             />
-             <TextField
+            <TextField
               id="linkedin"
-              label="account"
+              label="linkedin account"
               name="linkedin"
               variant="outlined"
               className={classes.textField}
@@ -146,7 +154,7 @@ const AddPostForm = ({ open, handleClose }) => {
             />
             <TextField
               id="twitter"
-              label="account"
+              label="twitter account"
               name="twitter"
               variant="outlined"
               className={classes.textField}
@@ -154,6 +162,24 @@ const AddPostForm = ({ open, handleClose }) => {
               inputRef={register}
               fullWidth
             />
+           {/* <Controller
+              as={
+                <Select
+                  input={<Input />}
+                  className={classes.textField}
+                  fullWidth
+                >
+                  {schools.map((liste,index) => (
+                    <MenuItem key={index} value={liste}>
+                      {liste[index]}
+                    </MenuItem>
+                  ))}
+                </Select>
+              }
+              name="school"
+              control={control}
+              error={errors.sinif ? true : false}
+            /> */}
             <TextField
               id="school"
               label="school"
@@ -172,6 +198,19 @@ const AddPostForm = ({ open, handleClose }) => {
               className={classes.textField}
               size="small"
               inputRef={register}
+              fullWidth
+            />
+            <TextField
+              id="content"
+              label="your about"
+              name="content"
+              multiline
+              size="small"
+              inputRef={register}
+              rows={4}
+              className={classes.textField}
+              variant="outlined"
+              error={errors.content ? true : false}
               fullWidth
             />
             <Controller
@@ -222,14 +261,14 @@ const AddPostForm = ({ open, handleClose }) => {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={clearForm} variant="outlined" color="primary">
+        <Button onClick={clearForm} variant="contained" color="primary">
           Vazgeç
         </Button>
         <Button
           type="submit"
           onClick={() => handleSubmit(onSubmit)()}
-          color="primary"
-          variant="outlined"
+          color="secondary"
+          variant="contained"
         >
           Yayınla
         </Button>

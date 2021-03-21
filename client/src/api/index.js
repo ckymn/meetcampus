@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiEndpoint = "http://localhost:3003/posts/"; //server uri
+const apiEndpoint = "http://localhost:5000/posts/"; //server uri
 
 //mongodb get  data
 export const fetchPosts = async () => 
